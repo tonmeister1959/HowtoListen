@@ -1,0 +1,46 @@
+<p id='Trials' style="font-family:verdana"> Trials: 1 of 10 </p>  <p id='correct' style="font-family:verdana">Correct %:</p>
+<canvas id='canvas' style= "z-index:1" style="float: left;"     "margin: 50px;" width='620' height ='320' style='border:1px solid'></canvas><br>
+<br>
+<br>
+<button id='start'  style ="height:50px;width:100px"  >Make noise</button>
+<button id='eq'   style ="height:50px;width:80px"  onclick = 'SwitchEQ(0)' >EQ</button>
+<button id='flat'  style ="height:50px;width:80px"  onclick = 'SwitchEQ(1)' >Flat</button>
+<button id='Done'  style= "height:50px;width:80px"  onclick = 'SwitchEQ(2)' >DONE</button>
+<br>
+<br>
+<div id="table-container"></div>  
+
+<span class="range-value"></span>
+<style>
+ 
+    table {
+      margin-left:0%;
+        border-collapse: collapse;
+      width: 75%;
+       
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #D6EEEE;
+    }
+    .table-scroll1 {
+  position: relative;
+  border: 1px solid #000;
+  padding-top: 37px;
+  background: #1e73be;
+}
+table-scroll1.positioned {
+  position: absolute;
+  top:100px;
+  left:100px;
+  width:100%;
+  box-shadow: 0 0 15px #333;
+}
+    </style>
+
+<script src='BandiD.js'></script>

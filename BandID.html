@@ -1,22 +1,38 @@
-<p id='Trials' style="font-family:verdana"> Trials: 1 of 10 </p>  <p id='correct' style="font-family:verdana">Correct %:</p>
-<canvas id='canvas' style= "z-index:1" style="float: left;"     "margin: 50px;" width='620' height ='320' style='border:1px solid'></canvas><br>
-<br>
-<br>
-<button id='start'  style ="height:50px;width:100px"  >Make noise</button>
-<button id='eq'   style ="height:50px;width:80px"  onclick = 'SwitchEQ(0)' >EQ</button>
-<button id='flat'  style ="height:50px;width:80px"  onclick = 'SwitchEQ(1)' >Flat</button>
-<button id='Done'  style= "height:50px;width:80px"  onclick = 'SwitchEQ(2)' >DONE</button>
-<br>
-<br>
-<div id="table-container"></div>  
-
-<span class="range-value"></span>
-<style>
+<head>
+  </head>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      font-size: 20px;
+    }
+    
+     .xaxislabel{
+  word-spacing: 30px;
+  text-indent: 40px;
+  font-size: 22px;
+  padding-left: 0px;
+  text-indent: -10px; /* same as the width below */
+  line-height: 1.2em;
+  //box-align: center;
+  position:absolute;
+}
+.yaxislabels {
+  //text-indent: 40px;
+  word-spacing: 140px;
+  font-size: 22px;
+  padding-left: 0px;
+ line-height: 2.2em;
+  position:absolute
  
-    table {
+ //display: flex;
+align-items: :right
+  //justify-content: center;
+}
+table {
       margin-left:0%;
         border-collapse: collapse;
       width: 75%;
+      top: 400px;
        
     }
     
@@ -35,12 +51,33 @@
   background: #1e73be;
 }
 table-scroll1.positioned {
-  position: absolute;
-  top:100px;
-  left:100px;
-  width:100%;
+  
   box-shadow: 0 0 15px #333;
+
 }
-    </style>
+  </style>
+
+  <p id='Trials' style="top:0px;position:absolute;width: 200px;"> Trials: 1</p>  
+  <p id='correct' style="position:absolute;width:500px;top: 25px;">Correct %:</p>
+  <p class="yaxislabels" style = "position:absolute;left:5px;top:30px;width:20px;height:320px;">15 10 +5 0dB -5 -10 -15</p>
+  
+  
+  <canvas id='canvas'  style= "z-index:-1;float:left;position:absolute;margin:0px;left:50px;top:70px;width:600px; height:300;border:1px solid"></canvas><br>
+  <p id="xaxislabel" class= "xaxislabel" style="left:50px;top:370px;width:630px">20  50  100   200   500    1k   2k    5k    10k   20k </p>
+  <p id="xaxislabel" class= "xaxislabel" style="left:300px;top: 400px;">FREQUENCY (Hz) </p>
+  
+  <br>
+  <button id='start'  style ="left:150;top:460px;height:50px;width:100px;position:absolute;"  >Make noise</button>
+  <button id='eq'   style =left:250;top:460px;height:50px;width:100px;position:absolute;"   onclick = 'SwitchEQ(0)' >EQ</button>
+  <button id='flat'  style="left:350;top:460px;height:50px;width:100px;position:absolute;"  onclick = 'SwitchEQ(1)' >Flat</button>
+  <button id='Done'  style= "left:475;top:460px;height:50px;width:100px;position:absolute;"   onclick = 'SwitchEQ(2)' >DONE</button>
+  <br>
+  <br>
+  
+  <div style="position: absolute;top: 575px;left: 30px;" id='table-container'>table</table></div>  
+
+
+
+
 
 <script src='BandiD.js'></script>

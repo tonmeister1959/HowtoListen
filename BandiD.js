@@ -62,10 +62,10 @@ function CreateButtons(x,y,BandNumber) {
  console.debug (x)
 //newButton.style.zIndex = "1"
   newButton.style.position = "absolute"
-  newButton.style.top = y
+  newButton.style.top = y-20
   newButton.style.left = x
-newButton.style.width = 25
-  newButton.style.height = 25
+newButton.style.width = 35
+  newButton.style.height = 35
   newButton.innerText = BandNumber
   newButton.id =  "Button" + BandNumber
 

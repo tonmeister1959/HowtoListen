@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+ 
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a, .dropdown-btn {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+}
+
+/* On mouse-over */
+.sidenav a:hover, .dropdown-btn:hover {
+  color: #f1f1f1;
+}
+
+/* Tab Content */
+.maincontent {
+display:block
+position:fixed;
+background-color: #f1f1f1;
+  top: -20px;
+height: 100%;
+left: 200px; /* Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  z-index: 5;
+  padding: 50px 10px;
+ width: 100%;
+ height: 75%;
+ width:transition:0.5s;
+ 
+
+}
+.hidden{
+  visibility: hidden;
+  display: none;
+  display:transition: 0.5s;
+  width: 0px;
+  width:transition 0.5s;
+}
+.Trainingapp{
+  width: 100%
+  height: 100%;
+  left: 200px;
+  margin-left: 200px;
+  position:fixed;
+    overflow:visible;
+  //top: 0px;
+  
+   background-size:cover;
+  transition: 0.5s;
+ 
+  z-index: 1;
+}
+/* Add an active class to the active dropdown button */
+.active {
+  background-color: green;
+  color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+.fa-caret-down {
+  float: right;
+  padding-right: 15px;
+}
+
+/* Some media queries for responsiveness */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.tabcontent{
+  display: none;
+  width: 100%;
+
+  
+
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  
+  
+  <button class="dropdown-btn">Spectral 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a onclick= "GetMenu(1)" href="#">BandID</a>
+    <a onclick= "GetMenu(2)"href="#">Curve Match</a>
+    <a onclick= "GetMenu(3)"href="#">Preference</a>
+  </div>
+  <button class="dropdown-btn">Spatial
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
+    <a onclick= "GetMenu(4)" href="#">Localization</a>
+    <a onclick= "GetMenu(5)"href="#">Envelopment</a>
+    <a onclick= "GetMenu(6)"href="#">Preference</a>
+  </div>
+  <a onclick= "GetMenu(7)" href="#">Dynamics</a>
+  <a onclick= "GetMenu(8)" href="#">Distortion+Noise</a>
+ 
+</div>
+<tabDropdown>
+<div id="Spectral" class="tabcontent"></div>
+</div>
+<div id="BandID" class="tabcontent" >
+  <h3>Spectral: BandID</h3>
+  <label  for="filterchoice">Filter:</label>  
+      <select id="filterchoice" name="filterchoice" onchange="OptionChange(id,selectedIndex)">
+          <option>Peak</option>  
+          <option>Dip</option>  
+          <option>Lowpass</option>  
+          <option>Highpass</option>  
+          <option>Low Shelf</option>  
+          <option>High Shelf</option>  
+          </select>
+          <br>
+          <br>
+      
+      <label for="Q">Q Factor:</label>
+      <select id= "Q" name="Q" onchange="OptionChange(id,selectedIndex)">
+     
+          <option>0.5</option>  
+          <option>1</option>  
+          <option>2</option>  
+          <option>4</option>  
+          <option>8</option>  
+          <option>16</option>
+          selected =1
+          </select>
+          
+          <br>
+          <br>
+  
+      <label for="gain">Gain (dB):</label>
+      <select id="gain" name="gain" onchange="OptionChange(id,selectedIndex)"> 
+          <option>3</option>  
+          <option>6</option>  
+          <option>10</option>  
+          </select>
+  <br>
+  <br>
+      <label for "programs">Programs:</label>
+          <select style="width:300px;" id="programs" name="programs" onchange="OptionChange(id,selectedIndex)">
+          <option>Program 1</option>
+          <option>Program 2</option>
+          <option>Program 3</option>
+      
+              </select>
+              <br>
+              <br>
+          <label  for="Skill">Starting Skill Level:</label>
+          <select id="skill" name="skill" onchange="OptionChange(id,selectedIndex)">
+            <option>2</option>
+            <option>3</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+
+          </select>
+          <br> 
+          <hr>
+          <br> 
+          <button onclick="SaveState()"">Save Parameters</button>
+  <h1></h1>
+  
+    </div>
+  </div>
+</div>
+
+<div id="Curve Match" class="tabcontent">
+  <h3>Spectral: Curve Match</h3>
+  <p>Curve Math Parameters are here.</p> 
+</div>
+<div id="Spectral: Preference" class="tabcontent">
+    <h3>Preference</h3>
+    <p>Preference Parameters are here.</p> 
+  </div>
+
+<div id="Localization" class="tabcontent">
+  <h3>Spatial: Localization</h3>
+  <p>Localization Parameters are here.</p>
+</div>
+
+<div id="Envelopment" class="tabcontent">
+  <h3>Spatial: Envelopment</h3>
+  <p>Envelopment Parameters go here.</p>
+</div>
+</tabdropdown>
+
+<div id="Spatial_Preference" class="tabcontent">
+    <h3>Spatial: Preference</h3>
+    <p>Envelopment Parameters go here.</p>
+  </div>
+  </tabdropdown>
+
+  <div id="Dynamics" class="tabcontent">
+    <h3>Dynamics: Compression</h3>
+    <p>Compression Parameters go here.</p>
+  </div>
+  </tabdropdown>
+
+  <div id="Distortion" class="tabcontent">
+    <h3>Distortion + Noise</h3>
+    <p>Distortion and Noise Parameters go here.</p>
+  </div>
+  </tabdropdown>
+
+  <div id="main"   style="margin-left: -1200px;transition-duration: 1s;position:absolute;width:50%" class="maincontent">main</div>
+<div id="TrainingApp" style="margin-left: 200px;position:relative;transition-duration: 1s;" class="TrainingApp" onclick = "loadTrainingapp()">click here to load training appe </div>
+
+
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+
+function startmenu(){
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+};
+}
+
+
+
+function GetMenu(itemnumber){
+ var  content
+content = document.getElementsByClassName('tabcontent');
+content = content.item(itemnumber)
+var element = document.getElementById("main");
+    element.classList.remove("hidden");
+    //element.classList.visible = true;
+    //element.classList.display = true;
+   // element.classList.width = "75%";
+    
+console.debug(content.innerHTML)
+document.getElementsByClassName('maincontent').item(0).innerHTML =content.innerHTML
+//document.getElementsByClassName('maincontent').style.marginLeft = "200px";
+//document.maincontent.marginLeft = "200px";
+document.getElementsByClassName('maincontent').item(0).style.marginLeft = "0px";
+
+
+
+return false;
+}
+ 
+  function SaveState() {
+
+document.getElementsByClassName('maincontent').item(0).style.marginLeft = "-1000px";
+
+//document.getElementsByClassName('maincontent').item(0).style.width = "0%";
+//document.getElementsByClassName('maincontent').item(0).style.height= "0%";
+
+console.debug(document.getElementsByClassName('maincontent').item(0).style.marginLeft)
+
+    }
+
+function OptionChange(id, selectedIndex) {
+  console.debug(id,selectedIndex)
+  var i =selectedIndex
+    var x
+  x= document.getElementById(id)
+  x =  x.options[i].text
+  console.debug(x)
+  return false;
+}
+
+function loadTrainingapp(){
+document.getElementById("TrainingApp").innerHTML =  '<object type="text/html" style=\"width:100%; height: 100vh;\" data="../HowtoListen/BandID.html"></object>'
+
+    startmenu()
+  return false;
+}
+
+
+
+</script>
+
+</body>
+</html> 

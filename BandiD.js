@@ -130,7 +130,7 @@ myanswer = ""
 //canvasContent.fillStyle = 'transparent'
 
       canvasContent.clearRect(0,0,300,600)
-      //canvasContent.stroke()
+      
 
       
       for (let index = 0; index < NumberofFilters; index++) {
@@ -151,7 +151,11 @@ myanswer = ""
   
         for (let i=0;i<nFreqs;++i) { 
           x =  (Math.log(Freqs[i]/20)) / Math.log(2)  * 30// 30.10299957
+          
          canvasContent.lineTo(x,125 -Mags[i]*40)
+         var a = x
+         var b = 125 -Mags[i]*40
+         canvasContent.moveTo(a,b)
        //canvasContent.lineTo(x,canvasContent.height-Mags[i]*100)
         canvasContent.stroke()
         }

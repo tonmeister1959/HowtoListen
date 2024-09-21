@@ -219,7 +219,7 @@ if (WhichOne ==2) {
   // Give feedback on answers
   if (myanswer == correctanswer) {
    var EndTime = Date.now()
-    alert ('You are correct! The Band is: ' + correctanswer +  ' ( ' +  Math.random(CorrectFilterFrequency) + ' Hz )')
+    alert ('You are correct! The Band is: ' + correctanswer +  ' ( ' +  Math.round(CorrectFilterFrequency) + ' Hz )')
     CorrectAnswersInLevel =CorrectAnswersInLevel + 1
     MinimumTrials = MinimumTrials + 1
    

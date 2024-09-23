@@ -16,7 +16,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: black;
   overflow-x: hidden;
   padding-top: 20px;
  
@@ -75,6 +75,7 @@ left: 200px; /* Same as the width of the sidenav */
     overflow:visible;
   //top: 0px;
   
+
    background-size:cover;
   transition: 0.5s;
  
@@ -147,12 +148,12 @@ left: 200px; /* Same as the width of the sidenav */
   <h3>Spectral: BandID</h3>
   <label  for="filterchoice">Filter:</label>  
       <select id="filterchoice" name="filterchoice" onchange="OptionChange(id,selectedIndex)">
-          <option>Peak</option>  
+          <option>peaking</option>  
           <option>Dip</option>  
-          <option>Lowpass</option>  
-          <option>Highpass</option>  
-          <option>Low Shelf</option>  
-          <option>High Shelf</option>  
+          <option>lowpass</option>  
+          <option>highpass</option>  
+          <option>lowshelf</option>  
+          <option>highshelf</option>  
           </select>
           <br>
           <br>
@@ -177,6 +178,10 @@ left: 200px; /* Same as the width of the sidenav */
           <option>3</option>  
           <option>6</option>  
           <option>10</option>  
+          <option>-3</option>  
+          <option>-6</option>  
+          <option>-10</option> 
+
           </select>
   <br>
   <br>
@@ -283,7 +288,7 @@ var element = document.getElementById("main");
     //element.classList.display = true;
    // element.classList.width = "75%";
     
-console.debug(content.innerHTML)
+//console.debug(content.innerHTML)
 document.getElementsByClassName('maincontent').item(0).innerHTML =content.innerHTML
 //document.getElementsByClassName('maincontent').style.marginLeft = "200px";
 //document.maincontent.marginLeft = "200px";
@@ -297,22 +302,60 @@ return false;
   function SaveState() {
 
 document.getElementsByClassName('maincontent').item(0).style.marginLeft = "-1000px";
+populateStorage()
+  }
 
-//document.getElementsByClassName('maincontent').item(0).style.width = "0%";
-//document.getElementsByClassName('maincontent').item(0).style.height= "0%";
+function populateStorage() {
+  
+  var message = ""
 
-console.debug(document.getElementsByClassName('maincontent').item(0).style.marginLeft)
+  sessionStorage.setItem("Task", "BandID")
+  var e = document.getElementById("filterchoice")
+sessionStorage.setItem("Filter", e.options[e.selectedIndex].text);
 
-    }
+e = document.getElementById("Q")
+sessionStorage.setItem("Q", e.options[e.selectedIndex].text);
+
+e = document.getElementById("gain")
+sessionStorage.setItem("Gain", e.options[e.selectedIndex].text);  
+
+e = document.getElementById("programs")
+sessionStorage.setItem("Program", e.options[e.selectedIndex].text);
+
+e = document.getElementById("skill")
+sessionStorage.setItem("Skill", e.options[e.selectedIndex].text); 
+Message = "Task: BandID;"
+for (var i = 0; i < sessionStorage.length; i++){
+  var item = sessionStorage.getItem(sessionStorage.key(i));
+  message = message + sessionStorage.key(i) + ": " + item + ";"
+  console.debug(sessionStorage.key(i) + " " + item);
+}
+
+sendmessage(message)
+
+console.debug (sessionStorage.getItem("Task") + " " + sessionStorage.getItem("Filter") + " " + sessionStorage.getItem("Q") + " " + sessionStorage.getItem("Gain") + " " + sessionStorage.getItem("Program") + " " + sessionStorage.getItem("Skill"))
+  for (var i = 0; i < sessionStorage.length; i++){
+     var item = sessionStorage.getItem(sessionStorage.key(i));
+    console.debug(sessionStorage.key(i) + " " + item);
+  }
+  
+
+
+}
+
+
+  
 
 function OptionChange(id, selectedIndex) {
-  console.debug(id,selectedIndex)
+  //console.debug(id,selectedIndex)
   var i =selectedIndex
     var x
   x= document.getElementById(id)
   x =  x.options[i].text
   console.debug(x)
-  return false;
+  document.getElementById(id).selectedIndex = i
+  //console.debug(id).selectedIndex = i
+ return true;
 }
 
 function loadTrainingapp(){
@@ -321,6 +364,19 @@ document.getElementById("TrainingApp").innerHTML =  '<object type="text/html" st
     startmenu()
   return false;
 }
+
+//sessionStorage.clear()
+
+function sendmessage(message) {
+  const target = document.getElementById("TrainingApp").querySelector("object");
+  if (target && target.contentWindow) {
+    target.contentWindow.postMessage(message, "http://localhost:80/HowtoListen/index.html");
+    console.debug("message sent");
+  } else {
+    console.debug("Target not found or contentWindow not available");
+  }
+}
+
 
 
 

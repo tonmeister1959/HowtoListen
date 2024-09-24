@@ -1,0 +1,12 @@
+
+<video controls id='file'>
+    <source src='dolby-test-tones_7_1_4.mp4'>
+</video>
+  <script>
+    let context = new AudioContext();
+    let videoElement = document.getElementById('file');
+    let source = context.createMediaElementSource(videoElement);
+    let gainNode = new GainNode(context, {gain: 0.5});
+    source.connect(gainNode).connect(context.destination);
+    videoElement.onplay = () => context.resume();
+  </script>

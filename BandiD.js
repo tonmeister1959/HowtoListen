@@ -320,7 +320,7 @@ start.onclick = () => {
   //source.start()
   
   
- // start.style.visibility = "hidden"
+  //start.style.visibility = "hidden"
   document.getElementById("table-container").innerText = ""
 
   console.debug(sessionStorage.getItem("NumberofBands"))
@@ -401,8 +401,10 @@ window.addEventListener(
   "message",
   (event) => {
     //alert ("Message received: " + event.data);
+    document.getElementById('start').style.visibility = "visible"
   
 document.getElementById('start').click() 
+ document.getElementById('start').style.visibility = "hidden"
 
     if (event.origin !== "http://localhost:80") return;
     //event.source.postMessage(

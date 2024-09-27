@@ -320,7 +320,7 @@ start.onclick = () => {
   //source.start()
   
   
-  start.style.visibility = "hidden"
+ // start.style.visibility = "hidden"
   document.getElementById("table-container").innerText = ""
 
   console.debug(sessionStorage.getItem("NumberofBands"))

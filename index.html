@@ -67,12 +67,14 @@ left: 200px; /* Same as the width of the sidenav */
   width:transition 0.5s;
 }
 .Trainingapp{
+  
   width: 100%
   height: 100%;
   left: 200px;
   margin-left: 200px;
   position:fixed;
     overflow:visible;
+    
   //top: 0px;
   
 
@@ -149,7 +151,6 @@ left: 200px; /* Same as the width of the sidenav */
   <label  for="filterchoice">Filter:</label>  
       <select id="filterchoice" name="filterchoice" onchange="OptionChange(id,selectedIndex)">
           <option>peaking</option>  
-          <option>Dip</option>  
           <option>lowpass</option>  
           <option>highpass</option>  
           <option>lowshelf</option>  
@@ -175,9 +176,9 @@ left: 200px; /* Same as the width of the sidenav */
   
       <label for="gain">Gain (dB):</label>
       <select id="gain" name="gain" onchange="OptionChange(id,selectedIndex)"> 
-          <option>3</option>  
-          <option>6</option>  
           <option>10</option>  
+          <option>6</option>  
+          <option>4</option>  
           <option>-3</option>  
           <option>-6</option>  
           <option>-10</option> 
@@ -208,7 +209,10 @@ left: 200px; /* Same as the width of the sidenav */
           <br> 
           <hr>
           <br> 
-          <button onclick="SaveState()"">Save Parameters</button>
+          <button onclick="Cancel()"">Cancel</button>
+          <button onclick="BeginTest()"">Begin New Test</button>
+         
+
   <h1></h1>
   
     </div>
@@ -218,48 +222,86 @@ left: 200px; /* Same as the width of the sidenav */
 <div id="Curve Match" class="tabcontent">
   <h3>Spectral: Curve Match</h3>
   <p>Curve Math Parameters are here.</p> 
+  <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+          //<button onclick="BeginTest()"">Begin New Test</button>
+         
 </div>
 <div id="Spectral: Preference" class="tabcontent">
     <h3>Preference</h3>
     <p>Preference Parameters are here.</p> 
+    <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+         // <button onclick="BeginTest()"">Begin New Test</button>
+         
   </div>
 
 <div id="Localization" class="tabcontent">
   <h3>Spatial: Localization</h3>
   <p>Localization Parameters are here.</p>
+  <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+          //<button onclick="BeginTest()"">Begin New Test</button>
+         
 </div>
 
 <div id="Envelopment" class="tabcontent">
   <h3>Spatial: Envelopment</h3>
   <p>Envelopment Parameters go here.</p>
+  <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+          //<button onclick="BeginTest()"">Begin New Test</button>
+         
 </div>
 </tabdropdown>
 
 <div id="Spatial_Preference" class="tabcontent">
     <h3>Spatial: Preference</h3>
     <p>Envelopment Parameters go here.</p>
+    <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+         // <button onclick="BeginTest()"">Begin New Test</button>
+         
   </div>
   </tabdropdown>
 
   <div id="Dynamics" class="tabcontent">
     <h3>Dynamics: Compression</h3>
     <p>Compression Parameters go here.</p>
+    <br> 
+          <hr>
+          <br> 
+          <button onclick="Cancel()"">Cancel</button>
+          //<button onclick="BeginTest()"">Begin New Test</button>
+         
   </div>
   </tabdropdown>
 
   <div id="Distortion" class="tabcontent">
     <h3>Distortion + Noise</h3>
-    <p>Distortion and Noise Parameters go here.</p>
+    //<p>Distortion and Noise Parameters go here.</p>
+  
   </div>
   </tabdropdown>
 
   <div id="main"   style="margin-left: -1200px;transition-duration: 1s;position:absolute;width:50%" class="maincontent">main</div>
-<div id="TrainingApp" style="margin-left: 200px;position:relative;transition-duration: 1s;" class="TrainingApp" onclick = "loadTrainingapp()">click here to load training appe </div>
+<div id="TrainingApp" style="margin-left: 200px;position:relative;transition-duration: 1s;" class="TrainingApp" onclick = "loadTrainingapp()">click here to load training app></div>
 
 
 <script>
     /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
 
+    //Window.onload = startmenu()
 function startmenu(){
     var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
@@ -276,7 +318,10 @@ for (i = 0; i < dropdown.length; i++) {
 };
 }
 
-
+function Cancel() {
+  document.getElementsByClassName('maincontent').item(0).style.marginLeft = "-1000px";
+ 
+}
 
 function GetMenu(itemnumber){
  var  content
@@ -299,8 +344,7 @@ document.getElementsByClassName('maincontent').item(0).style.marginLeft = "0px";
 return false;
 }
  
-  function SaveState() {
-
+  function BeginTest() {
 document.getElementsByClassName('maincontent').item(0).style.marginLeft = "-1000px";
 populateStorage()
   }

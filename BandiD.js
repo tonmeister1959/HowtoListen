@@ -118,7 +118,7 @@ function DrawFilters(NumberofBands, Qfactor, GainindB, FilterTypes) {
   canvasContent.beginPath
   canvasContent.clearRect(0, 0, 300, 600)
 
-  alert (NumberofBands + "  " + Qfactor + "  " + GainindB + "  " + FilterTypes) 
+//alert (NumberofBands + "  " + Qfactor + "  " + GainindB + "  " + FilterTypes) 
 
 
   for (let index = 0; index < NumberofBands; index++) {
@@ -137,7 +137,8 @@ function DrawFilters(NumberofBands, Qfactor, GainindB, FilterTypes) {
     canvasContent.strokeStyle = 'blue'
     canvasContent.setLineDash([0, 0])
     canvasContent.beginPath()
-
+previousX = 0
+previousY = 0
       // Draws the magnitude response of the filter
 for (let i = 0; i < nFreqs; ++i) {
       x = (Math.log(Freqs[i] / 20)) / Math.log(2) * 30// 30.10299957
@@ -313,14 +314,18 @@ start.onclick = () => {
   let source = new AudioBufferSourceNode(audioContext, { loop: true })
   let nFrames = audioContext.sampleRate
   source.buffer = audioContext.createBuffer(1, nFrames, audioContext.sampleRate)
-  for (i = 0; i < nFrames; i++) source.buffer.getChannelData(0)[i] = 2 * Math.random() - 1
-  source.connect(biquadFilter).connect(audioContext.destination)
-  source.start()
-  //start.style.visibility = "hidden"
+ 
+  for (i = 0; i < nFrames; i++) source.buffer.getChannelData(0)[i] = 2 * Math.random() - 1 // this is white noise 
+  source.connect(biquadFilter).connect(audioContext.destination) 
+  //source.start()
+  
+  
+  start.style.visibility = "hidden"
+  document.getElementById("table-container").innerText = ""
 
   console.debug(sessionStorage.getItem("NumberofBands"))
   console.debug(sessionStorage.length)
-  alert (sessionStorage.getItem("Task") + " " + sessionStorage.getItem("Filter") + " " + sessionStorage.getItem("Q") + " " + sessionStorage.getItem("Gain") + " " + sessionStorage.getItem("Program") + " " + sessionStorage.getItem("Skill"))
+  //alert (sessionStorage.getItem("Task") + " " + sessionStorage.getItem("Filter") + " " + sessionStorage.getItem("Q") + " " + sessionStorage.getItem("Gain") + " " + sessionStorage.getItem("Program") + " " + sessionStorage.getItem("Skill"))
 
 
   if (sessionStorage.getItem("Filter") !== null) {
@@ -336,7 +341,7 @@ start.onclick = () => {
   DrawFilters(NumberofBands, Qfactor, GainindB, FilterTypes)
   DrawScale()
   eq.style.backgroundColor = "green"
-
+source.start()
 
 }
 function loadmenu() {
@@ -395,8 +400,9 @@ function closeMe()
 window.addEventListener(
   "message",
   (event) => {
-    alert ("Message received: " + event.data);
-//document.getElementById('start').click() 
+    //alert ("Message received: " + event.data);
+  
+document.getElementById('start').click() 
 
     if (event.origin !== "http://localhost:80") return;
     //event.source.postMessage(
